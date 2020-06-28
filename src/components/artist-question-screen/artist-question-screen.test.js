@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ArtistQuestionScreen from './artist-question-screen.jsx';
+import {ArtistQuestionScreenForTesting} from './artist-question-screen.jsx';
 
 const mock = {
   question: {
     type: `artist`,
     song: {
-      src: ``,
+      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       artist: `one`
     },
     answers: [{
@@ -26,9 +26,10 @@ const mock = {
 it(`<ArtistQuestionScreen/> rendered correctly`, () => {
   const {question} = mock;
   const tree = renderer
-    .create(<ArtistQuestionScreen
+    .create(<ArtistQuestionScreenForTesting
       question={question}
       onAnswer={()=>{}}
+      renderPlayer={(src, id) => (<div className="player">src: {src}; id: {id}</div>)}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

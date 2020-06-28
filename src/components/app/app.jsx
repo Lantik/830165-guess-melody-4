@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import GameScreen from '../game-screen/game-screen.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
-import {GameType} from '../../const/game.js';
+import {GAME_TYPE} from '../../const/game.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -35,45 +36,41 @@ class App extends PureComponent {
 
     if (question) {
       switch (question.type) {
-        case GameType.ARTIST:
+        case GAME_TYPE.ARTIST:
           return (
-            <ArtistQuestionScreen
-              question={question}
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1,
-                }));
-              }}
-            />
+            <GameScreen type={question.type}>
+              <ArtistQuestionScreen
+                question={question}
+                onAnswer={() => {
+                  this.setState((prevState) => ({
+                    step: prevState.step + 1,
+                  }));
+                }}
+              />
+            </GameScreen>
           );
-        case GameType.GENRE:
+        case GAME_TYPE.GENRE:
           return (
-            <GenreQuestionScreen
-              question={question}
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1,
-                }));
-              }}
-            />
+            <GameScreen type={question.type}>
+              <GenreQuestionScreen
+                question={question}
+                onAnswer={() => {
+                  this.setState((prevState) => ({
+                    step: prevState.step + 1,
+                  }));
+                }}
+              />
+            </GameScreen>
           );
       }
     }
-
     return null;
   }
 
   render() {
-
     return (<BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {this._renderGameScreen()}
-        </Route>
-        <Route exact path="/dev-genre">
-          {this._renderGameScreen()}
-        </Route>
-        <Route exact path="/dev-artist">
           {this._renderGameScreen()}
         </Route>
       </Switch>

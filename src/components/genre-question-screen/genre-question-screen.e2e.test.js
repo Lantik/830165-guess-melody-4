@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import GenreQuestionScreen from './genre-question-screen.jsx';
+import {GenreQuestionScreenForTesting} from './genre-question-screen.jsx';
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -31,9 +31,10 @@ it(`Invoked callback function on submit`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
 
-  const screen = shallow(<GenreQuestionScreen
+  const screen = shallow(<GenreQuestionScreenForTesting
     question={question}
     onAnswer={onAnswer}
+    renderPlayer={() => {}}
   />);
 
   const form = screen.find(`form`);
@@ -46,9 +47,10 @@ it(`Prevented form sending on submit`, () => {
   const {question} = mock;
   const formSendPrevention = jest.fn();
 
-  const screen = shallow(<GenreQuestionScreen
+  const screen = shallow(<GenreQuestionScreenForTesting
     question={question}
     onAnswer={() => {}}
+    renderPlayer={() => {}}
   />);
 
   const form = screen.find(`form`);
@@ -64,9 +66,10 @@ it(`User answer passed to callback is consistent with "userAnswer" prop`, () => 
   const onAnswer = jest.fn();
   const userAnswer = [false, true, false, false];
 
-  const screen = shallow(<GenreQuestionScreen
+  const screen = shallow(<GenreQuestionScreenForTesting
     question={question}
     onAnswer={onAnswer}
+    renderPlayer={() => {}}
   />);
 
   const form = screen.find(`form`);

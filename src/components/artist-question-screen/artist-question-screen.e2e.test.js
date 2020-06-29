@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ArtistQuestionScreen from './artist-question-screen.jsx';
+import {ArtistQuestionScreenForTesting} from './artist-question-screen.jsx';
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -36,9 +36,10 @@ const mockEvent = {
 it(`Click on answer invoked callback function`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
-  const screen = shallow(<ArtistQuestionScreen
+  const screen = shallow(<ArtistQuestionScreenForTesting
     onAnswer={onAnswer}
     question={question}
+    renderPlayer={() => {}}
   />);
 
   const answerInputs = screen.find(`input`);
@@ -56,9 +57,10 @@ it(`Click on answer passed to the callback data object from which this answer wa
     picture: `pic-one`
   };
 
-  const screen = shallow(<ArtistQuestionScreen
+  const screen = shallow(<ArtistQuestionScreenForTesting
     onAnswer={onAnswer}
     question={question}
+    renderPlayer={() => {}}
   />);
 
   const answerInputs = screen.find(`input`);

@@ -37,6 +37,18 @@ test.each([[1, 1], [2, 2], [3, 3]])(`reducer increment mistakes by %i`, (payload
   expect(result).toEqual(expectedResult);
 });
 
+test.each([[1], [2], [-4]])(`reducer set steps to zero with payload %i`, (payload) => {
+  const result = reducer(initialState, {
+    type: ActionType.SET_STEPS_TO_ZERO,
+    payload
+  });
+  const expectedResult = {
+    mistakes: 0,
+    step: 0
+  };
+
+  expect(result).toEqual(expectedResult);
+});
 
 test.each([[1, 0], [2, 1], [3, 2]])(`Action creator incments steps %i times`, (steps, expectedStep) => {
   let state = initialState;
@@ -51,6 +63,21 @@ test.each([[1, 0], [2, 1], [3, 2]])(`Action creator incments steps %i times`, (s
   };
 
   expect(state).toEqual(expectedResult);
+});
+
+test.each([[1], [-2], [10]])(`Action creator set steps from %i to 0`, (initialStep) => {
+  const state = {
+    step: initialStep,
+    mistakes: 0
+  };
+
+  const result = reducer(state, ActionCreator.setStepsToZero());
+  const expectedResult = {
+    mistakes: 0,
+    step: 0
+  };
+
+  expect(result).toEqual(expectedResult);
 });
 
 

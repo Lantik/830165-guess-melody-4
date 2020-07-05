@@ -25,7 +25,7 @@ class App extends PureComponent {
     } = this.props;
     const question = questions[step];
 
-    if (step === -1 || step >= questions.length) {
+    if (step === -1 || step >= questions.length || mistakes >= maxMistakes) {
       return (
         <WelcomeScreen
           maxMistakes={maxMistakes}

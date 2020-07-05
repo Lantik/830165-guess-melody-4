@@ -15,13 +15,21 @@ class App extends PureComponent {
   }
 
   _renderGameScreen() {
-    const {errorsCount, questions, onUserAnswer, onWelcomeButtonClick, step} = this.props;
+    const {
+      maxMistakes,
+      questions,
+      onUserAnswer,
+      onWelcomeButtonClick,
+      step,
+      mistakes
+    } = this.props;
     const question = questions[step];
+    const lives = maxMistakes - mistakes;
 
     if (step === -1 || step >= questions.length) {
       return (
         <WelcomeScreen
-          errorsCount={errorsCount}
+          maxMistakes={maxMistakes}
           onWelcomeButtonClick={onWelcomeButtonClick}
         />
       );
@@ -31,7 +39,7 @@ class App extends PureComponent {
       switch (question.type) {
         case GAME_TYPE.ARTIST:
           return (
-            <GameScreen type={question.type}>
+            <GameScreen type={question.type} lives={lives}>
               <ArtistQuestionScreen
                 question={question}
                 onAnswer={onUserAnswer}
@@ -40,7 +48,7 @@ class App extends PureComponent {
           );
         case GAME_TYPE.GENRE:
           return (
-            <GameScreen type={question.type}>
+            <GameScreen type={question.type} lives={lives}>
               <GenreQuestionScreen
                 question={question}
                 onAnswer={onUserAnswer}
@@ -64,20 +72,28 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  errorsCount: PropTypes.number.isRequired,
-  questions: PropTypes.array.isRequired
+  maxMistakes: PropTypes.number.isRequired,
+  questions: PropTypes.array.isRequired,
+  step: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  onWelcomeButtonClick: PropTypes.func.isRequired,
+  onUserAnswer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  step: state.step
+  step: state.step,
+  mistakes: state.mistakes,
+  maxMistakes: state.maxMistakes
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onWelcomeButtonClick() {
     dispatch(ActionCreator.setStepsToZero());
+    dispatch(ActionCreator.setMistakesToZero());
   },
-  onUserAnswer() {
-    dispatch(ActionCreator.incrementStep())
+  onUserAnswer(question, answer) {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistakes(question, answer));
   }
 });
 

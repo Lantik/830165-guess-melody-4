@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {App} from './app.jsx';
 
-const errorsCount = 5;
+const maxMistakes = 5;
 const questions = [
   {
     type: `genre`,
@@ -42,8 +42,12 @@ const questions = [
 it(`<App/> rendered correctly`, () => {
   const tree = renderer
     .create(<App
-      errorsCount={errorsCount}
+      maxMistakes={maxMistakes}
       questions={questions}
+      onUserAnswer={() => {}}
+      onWelcomeButtonClick={() => {}}
+      step={-1}
+      mistakes={3}
     />)
     .toJSON();
 

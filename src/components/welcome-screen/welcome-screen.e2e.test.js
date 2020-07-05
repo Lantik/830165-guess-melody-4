@@ -7,12 +7,14 @@ Enzyme.configure({
   adapter: new Adapter()
 });
 
+const maxMistakes = 3;
+
 it(`Function invoked on welcome button pressed`, () => {
   const onWelcomeButtonClickHandler = jest.fn();
 
   const welcomeScreen = shallow(
       <WelcomeScreen
-        errorsCount={3}
+        maxMistakes={maxMistakes}
         onWelcomeButtonClick={onWelcomeButtonClickHandler}
       />
   );

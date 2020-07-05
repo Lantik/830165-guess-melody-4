@@ -6,7 +6,9 @@ import {GAME_TYPE} from '../../const/game.js';
 it(`<GameScreen /> rendered correctly.`, () => {
   const tree = renderer
     .create(<GameScreen
-      type={GAME_TYPE.GENRE}>
+      type={GAME_TYPE.GENRE}
+      lives={3}
+    >
       <div></div>
     </GameScreen>).toJSON();
 

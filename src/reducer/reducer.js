@@ -1,10 +1,12 @@
 import {extend} from '../utils/common.js';
 import {GAME_TYPE} from '../const/game.js';
+import questions from '../mocks/questions.js';
 
 const initialState = {
   mistakes: 0,
   step: -1,
-  maxMistakes: 3
+  maxMistakes: 3,
+  questions
 };
 
 const ActionType = {
@@ -21,7 +23,7 @@ const isGenreAnswerCorrect = (question, answer) => {
 };
 
 const isArtistAnswerCorrect = (question, answer) => {
-  return question.artist === answer.artist;
+  return question.song.artist === answer.artist;
 };
 
 const ActionCreator = {

@@ -83,7 +83,8 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   step: state.step,
   mistakes: state.mistakes,
-  maxMistakes: state.maxMistakes
+  maxMistakes: state.maxMistakes,
+  questions: state.questions
 });
 
 const mapDispatchToProps = (dispatch) => ({

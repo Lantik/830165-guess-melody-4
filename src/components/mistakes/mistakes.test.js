@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Lives from './lives.jsx';
+import Mistakes from './mistakes.jsx';
 
-it(`<Lives /> rendered correctly`, () => {
+it(`<Mistakes /> rendered correctly`, () => {
   const tree = renderer
-    .create(<Lives
+    .create(<Mistakes
       count={3}
     />).toJSON();
 

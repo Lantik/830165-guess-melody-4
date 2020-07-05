@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Lives /> rendered correctly 1`] = `
+exports[`<Mistakes /> rendered correctly 1`] = `
 <div
   className="game__mistakes"
 >

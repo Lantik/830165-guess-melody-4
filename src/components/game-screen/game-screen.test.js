@@ -7,7 +7,7 @@ it(`<GameScreen /> rendered correctly.`, () => {
   const tree = renderer
     .create(<GameScreen
       type={GAME_TYPE.GENRE}
-      lives={3}
+      mistakes={3}
     >
       <div></div>
     </GameScreen>).toJSON();

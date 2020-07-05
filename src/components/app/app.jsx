@@ -24,7 +24,6 @@ class App extends PureComponent {
       mistakes
     } = this.props;
     const question = questions[step];
-    const lives = maxMistakes - mistakes;
 
     if (step === -1 || step >= questions.length) {
       return (
@@ -39,7 +38,7 @@ class App extends PureComponent {
       switch (question.type) {
         case GAME_TYPE.ARTIST:
           return (
-            <GameScreen type={question.type} lives={lives}>
+            <GameScreen type={question.type} mistakes={mistakes}>
               <ArtistQuestionScreen
                 question={question}
                 onAnswer={onUserAnswer}
@@ -48,7 +47,7 @@ class App extends PureComponent {
           );
         case GAME_TYPE.GENRE:
           return (
-            <GameScreen type={question.type} lives={lives}>
+            <GameScreen type={question.type} mistakes={mistakes}>
               <GenreQuestionScreen
                 question={question}
                 onAnswer={onUserAnswer}

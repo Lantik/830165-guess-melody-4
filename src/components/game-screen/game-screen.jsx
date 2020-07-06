@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Mistakes from '../mistakes/mistakes.jsx';
 import {GAME_TYPE} from '../../const/game.js';
 
 const GameScreen = (props) => {
-  const {type} = props;
+  const {type, mistakes} = props;
 
   return (
     <section className="game">
@@ -17,12 +18,7 @@ const GameScreen = (props) => {
           <circle className="timer__line" cx="390" cy="390" r="370"
             style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
         </svg>
-
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes count={mistakes}/>
       </header>
       {props.children}
     </section>
@@ -31,7 +27,8 @@ const GameScreen = (props) => {
 
 GameScreen.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf([GAME_TYPE.ARTIST, GAME_TYPE.GENRE]).isRequired
+  type: PropTypes.oneOf([GAME_TYPE.ARTIST, GAME_TYPE.GENRE]).isRequired,
+  mistakes: PropTypes.number.isRequired
 };
 
 export default GameScreen;

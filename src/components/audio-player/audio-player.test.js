@@ -1,25 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import AudioPlayer from './audio-player.jsx';
-
-const mock = {
-  song: {
-    src: `http://test.music.com/test-melody.mp4`
-  }
-};
+import {AudioPlayer} from './audio-player.jsx';
 
 it(`<AudioPlayer/> component rendered correctly`, () => {
-  const {song} = mock;
   const tree = renderer
     .create(<AudioPlayer
       isPlaying={true}
-      src={song.src}
+      isLoading={true}
       onPlayButtonClick={() => {}}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    }).toJSON();
+    >
+      <audio></audio>
+    </AudioPlayer>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

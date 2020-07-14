@@ -29,6 +29,23 @@ it(`<GenreQuestionScreen/> rendered correctly`, () => {
     .create(<GenreQuestionScreenForTesting
       question={question}
       onAnswer={() => {}}
+      onChange={() => {}}
+      userAnswers={[false, false, false, false]}
+      renderPlayer={(src, id) => (<div className="player">src: {src}; id: {id}</div>)}
+    />).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`<GenreQuestionScreen/> rendered correctly`, () => {
+  const {question} = mock;
+
+  const tree = renderer
+    .create(<GenreQuestionScreenForTesting
+      question={question}
+      onAnswer={() => {}}
+      onChange={() => {}}
+      userAnswers={[true, false, true, false]}
       renderPlayer={(src, id) => (<div className="player">src: {src}; id: {id}</div>)}
     />).toJSON();
 

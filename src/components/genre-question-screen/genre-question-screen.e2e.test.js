@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {GenreQuestionScreenForTesting} from './genre-question-screen.jsx';
 
@@ -51,7 +51,7 @@ it(`Invoked callback function on change`, () => {
   const userAnswers = [false, true, false, false];
   const handleChange = jest.fn();
 
-  const screen = shallow(<GenreQuestionScreenForTesting
+  const screen = mount(<GenreQuestionScreenForTesting
     question={question}
     onAnswer={() => {}}
     onChange={handleChange}

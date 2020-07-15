@@ -22,11 +22,10 @@ const withUserAnswer = (Component) => {
       });
     }
 
-    _handleAnswer(evt) {
+    _handleAnswer() {
       const {onAnswer, question} = this.props;
       const {answers} = this.state;
 
-      evt.preventDefault();
       onAnswer(question, answers);
     }
 

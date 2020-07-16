@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/reducer.js';
 import GameScreen from '../game-screen/game-screen.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
+import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
+import WinScreen from '../win-screen/win-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
 import {GAME_TYPE} from '../../const/game.js';
@@ -19,17 +21,35 @@ class App extends PureComponent {
       maxMistakes,
       questions,
       onUserAnswer,
-      onWelcomeButtonClick,
+      onBeginGameButtonClick,
       step,
       mistakes
     } = this.props;
     const question = questions[step];
 
-    if (step === -1 || step >= questions.length || mistakes >= maxMistakes) {
+    if (step === -1) {
       return (
         <WelcomeScreen
           maxMistakes={maxMistakes}
-          onWelcomeButtonClick={onWelcomeButtonClick}
+          onWelcomeButtonClick={onBeginGameButtonClick}
+        />
+      );
+    }
+
+    if (mistakes >= maxMistakes) {
+      return (
+        <GameOverScreen
+          onReplayButtonClick={onBeginGameButtonClick}
+        />
+      );
+    }
+
+    if (step >= questions.length) {
+      return (
+        <WinScreen
+          mistakesCount={mistakes}
+          questionsCount={questions.length}
+          onReplayButtonClick={onBeginGameButtonClick}
         />
       );
     }
@@ -79,7 +99,7 @@ App.propTypes = {
   questions: PropTypes.array.isRequired,
   step: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
-  onWelcomeButtonClick: PropTypes.func.isRequired,
+  onBeginGameButtonClick: PropTypes.func.isRequired,
   onUserAnswer: PropTypes.func.isRequired
 };
 
@@ -91,7 +111,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onWelcomeButtonClick() {
+  onBeginGameButtonClick() {
     dispatch(ActionCreator.setStepsToZero());
     dispatch(ActionCreator.setMistakesToZero());
   },

@@ -66,6 +66,10 @@ class App extends PureComponent {
           {this._renderGameScreen()}
         </Route>
       </Switch>
+      <Switch>
+        <Route exact path="/dev-component">
+        </Route>
+      </Switch>
     </BrowserRouter>);
   }
 }
@@ -94,6 +98,10 @@ const mapDispatchToProps = (dispatch) => ({
   onUserAnswer(question, answer) {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistakes(question, answer));
+  },
+  onReplayButtonClick() {
+    dispatch(ActionCreator.setStepsToZero());
+    dispatch(ActionCreator.setMistakesToZero());
   }
 });
 

@@ -45,7 +45,7 @@ it(`<App/> rendered correctly`, () => {
       maxMistakes={maxMistakes}
       questions={questions}
       onUserAnswer={() => {}}
-      onWelcomeButtonClick={() => {}}
+      onBeginGameButtonClick={() => {}}
       step={-1}
       mistakes={3}
     />)

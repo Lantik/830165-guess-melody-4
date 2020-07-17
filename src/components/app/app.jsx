@@ -86,10 +86,6 @@ class App extends PureComponent {
           {this._renderGameScreen()}
         </Route>
       </Switch>
-      <Switch>
-        <Route exact path="/dev-component">
-        </Route>
-      </Switch>
     </BrowserRouter>);
   }
 }

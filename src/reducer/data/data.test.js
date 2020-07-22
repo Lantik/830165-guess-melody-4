@@ -15,7 +15,7 @@ describe(`Data Reducer`, () => {
   });
 
   it(`reducer replaces old questions with new ones`, () => {
-    const state = { questions:[ {id: 4}, {id: 5}, {id: 6}]};
+    const state = {questions: [{id: 4}, {id: 5}, {id: 6}]};
     const questions = [{id: 1}, {id: 2}, {id: 3}];
 
     const result = reducer(state, {

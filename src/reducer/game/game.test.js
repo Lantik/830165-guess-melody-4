@@ -1,7 +1,7 @@
-import {reducer, ActionType, ActionCreator} from './reducer.js';
-import {GAME_TYPE} from '../const/game.js';
+import {reducer, ActionType, ActionCreator} from './game.js';
+import {GAME_TYPE} from '../../const/game.js';
 
-describe(`Reducer`, () => {
+describe(`Game Reducer`, () => {
   test.each([[1, 1], [2, 2], [3, 3]])(`reducer increment mistakes by %i`, (payload, expectedMistakes) => {
     const state = {mistakes: 0};
 
@@ -93,7 +93,7 @@ describe(`Action Creator increments steps`, () => {
   });
 });
 
-describe(`ActionCreator increment mistakes`, () => {
+describe(`Game ActionCreator increment mistakes`, () => {
   it(`Action creator increments mistakes if answer for genre question is wrong`, () => {
     let state = {mistakes: 0};
     const answer = [true, false, true, false];

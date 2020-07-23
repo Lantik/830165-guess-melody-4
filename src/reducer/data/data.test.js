@@ -1,4 +1,6 @@
-import {reducer, ActionType, ActionCreator} from './data.js';
+import MockAdapter from 'axios-mock-adapter';
+import {createApi} from '../../api.js';
+import {reducer, ActionType, ActionCreator, Operation} from './data.js';
 
 
 describe(`Data Reducer`, () => {
@@ -35,5 +37,27 @@ describe(`Data ActionCreator`, () => {
     const result = reducer(state, ActionCreator.loadQuetions(questions));
 
     expect(result).toEqual({questions});
+  });
+});
+
+describe(`Data Operation`, () => {
+  it(`Operation loaad questions`, () => {
+    const dispatch = jest.fn();
+    const api = createApi();
+    const apiMock = new MockAdapter(api);
+    const questinLoader = Operation.loadQuestions();
+
+    apiMock
+      .onGet(`/questions`)
+      .reply(200, [{fake: true}]);
+
+    return questinLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ActionType.LOAD_QUESTIONS,
+          payload: [{fake: true}]
+        });
+      });
   });
 });

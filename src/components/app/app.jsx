@@ -2,14 +2,17 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/reducer.js';
 import GameScreen from '../game-screen/game-screen.jsx';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import WinScreen from '../win-screen/win-screen.jsx';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
+import {ActionCreator} from '../../reducer/game/game.js';
+import {getQuestions} from '../../reducer/data/selectors.js';
+
 import {GAME_TYPE} from '../../const/game.js';
+import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors.js';
 
 class App extends PureComponent {
   constructor(props) {
@@ -100,10 +103,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  step: state.step,
-  mistakes: state.mistakes,
-  maxMistakes: state.maxMistakes,
-  questions: state.questions
+  step: getStep(state),
+  mistakes: getMistakes(state),
+  maxMistakes: getMaxMistakes(state),
+  questions: getQuestions(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
